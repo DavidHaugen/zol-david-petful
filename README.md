@@ -16,4 +16,5 @@ Petful allows users to adopt cats and/or dogs, but they are only allowed to adop
 
 Technologies used:
 Client: React, React Context API, React Router, HTML, CSS
+
 Server: Node.js, Express
