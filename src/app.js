@@ -1,8 +1,17 @@
+'use strict';
+
 const express = require('express');
 const cors = require('cors');
+const catRouter = require('./cat/catRouter');
+const dogRouter = require('./dog/dogRouter');
 
 const app = express();
 app.use(cors());
+
+
+app.use('/api/cat', catRouter);
+app.use('/api/dog', dogRouter);
+
 
 // Catch-all 404
 app.use(function (req, res, next) {
@@ -21,6 +30,5 @@ app.use(function (err, req, res, next) {
   });
 });
 
-app.listen(8080,()=>{
-  console.log('Serving on 8080');
-});
+
+module.exports = app;
