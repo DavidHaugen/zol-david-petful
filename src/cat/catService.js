@@ -1,21 +1,30 @@
 'use strict';
-
-const store = {
-  cat: [
-    {
-      imageURL:'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg', 
-      imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
-      name: 'Fluffy',
-      sex: 'Female',
-      age: 2,
-      breed: 'Bengal',
-      story: 'Thrown on the street'
-    }]
-};
-
 const catService = {
-  getNextCat: () => {return store.cat[0];
+  // get next cat: store.dequeue;
+  // if user clicks adopt, dequeue. 
+  adoptCat(req){
+    let catsQueue = req.app.get('cats');
+    return catsQueue.dequeue();
+  },
+  // get all cats: generate an array of objects, return that.
+  getAllCats(req) {
+    const cats = [];
+    const catsQueue = req.app.get('cats');
+
+    if(catsQueue.first === null){
+      return [];
+    }
+
+    let curr = catsQueue.first;
+    while(curr !== null){
+      cats.push(curr.value);
+      curr = curr.next;
+    }
+    
+    return cats;
   }
+  // insert cat: store.enqueue
+
 };
 
 module.exports = catService;
