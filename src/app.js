@@ -4,10 +4,11 @@ const express = require('express');
 const cors = require('cors');
 const catRouter = require('./cat/catRouter');
 const dogRouter = require('./dog/dogRouter');
+// const queueBuilder = require('./queue-builder');
 
 const app = express();
 app.use(cors());
-
+// app.use(queueBuilder);
 
 app.use('/api/cat', catRouter);
 app.use('/api/dog', dogRouter);

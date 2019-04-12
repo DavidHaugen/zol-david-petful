@@ -1,30 +1,32 @@
 'use strict';
-
-const store = {
-// queue of dogs
-
-  dog: [
-    {
-      imageURL: 'http://www.dogster.com/wp-content/uploads/2015/05/Cute%20dog%20listening%20to%20music%201_1.jpg',
-      imageDescription: 'A smiling golden-brown golden retreiver listening to music.',
-      name: 'Zeus',
-      sex: 'Male',
-      age: 3,
-      breed: 'Golden Retriever',
-      story: 'Owner Passed away'
-    }]
-};
+const  queueBuilder  = require('../queue-builder')
 
 const dogService = {
   // get next dog: store.dequeue;
+  // if user clicks adopt, dequeue. 
+  adoptDog(){
+    let dogsQueue = queueBuilder();
+    return dogsQueue.dequeue();
+  },
   // get all dogs: generate an array of objects, return that.
+  getAllDogs() {
+    const dogs = [];
+    const dogsQueue = queueBuilder();
+
+    if(dogsQueue.first === null){
+      return [];
+    }
+
+    let curr = dogsQueue.first;
+    while(curr !== null){
+      dogs.push(curr.value)
+      curr = curr.next;
+    }
+    
+    return dogs;
+  }
   // insert dog: store.enqueue
 
-  // if user clicks next, enqueue the dequeued dog.
-  // if user clicks adopt, dequeue. 
-
-  getNextDog: () => {return store.dog[0];
-  }
 };
 
 module.exports = dogService;

@@ -7,10 +7,18 @@ const dogService = require('./dogService');
 dogRouter
   .route('/')
   .get((req,res, next) => {
-    res.status(200).json(dogService.getNextDog());
-    next();
+    // console.log(dogService.getAllDogs())
+    res.json(dogService.getAllDogs());
   })
-;
+  .delete((req, res, next) => {
+    res.json(dogService.adoptDog())
+  })
+
+
+// dogRouter.get('/', (req, res, next) => {
+//   console.log(dogService)
+//   res.json(dogService.getAllDogs())
+// })
 
 
 module.exports = dogRouter;
